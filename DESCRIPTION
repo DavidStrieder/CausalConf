@@ -5,7 +5,7 @@ Author: David Strieder [aut, cre]
 Maintainer: David Strieder <david.strieder@tum.de>
 Description: Framework for constructing confidence intervals for total causal effects based on observational data that capture both types of uncertainty, the uncertainty regarding the causal structure resulting from a data-driven model selection, and uncertainty about the numerical size of the effect. Assumes linear structural equation models with partially homoscedastic Gaussian errors to ensure identifiability.
 License: GPL (>= 2)
-Imports: stats,gtools
+Imports: stats,gtools,parallel
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
