@@ -34,10 +34,10 @@ confDualLRTpartial <- function(data, alpha = 0.05) {
   tresh <- -log((val[which(varperm == 1)] + val[which(varperm == 2)]) * sqrt(prod(val[-which(varperm == 1 | varperm == 2)])))
   
   # Find plausible causal orderings (parallelized)
-  ordertrue <- parallel::mclapply(0:(3^(d - 2) - 1), orderDualLRTpartial, tresh = tresh, d = d, n = n, siginv = siginv, ord = c(1, 2), crit = stats::qchisq(1 - alpha, 2), mc.cores = parallel::detectCores())
+  ordertrue <- parallel::mclapply(0:(3^(d - 2) - 1), orderDualLRTpartial, tresh = tresh, d = d, n = n, siginv = siginv, ord = c(1, 2), crit = stats::qchisq(1 - alpha, 2), mc.cores = parallel::detectCores()-1)
   ordertrue <- do.call(rbind, ordertrue)
   
-  orderfalse <- parallel::mclapply(0:(3^(d - 2) - 1), orderDualLRTpartial, tresh = tresh, d = d, n = n, siginv = siginv, ord = c(2, 1), crit = stats::qchisq(1 - alpha, 1), mc.cores = parallel::detectCores())
+  orderfalse <- parallel::mclapply(0:(3^(d - 2) - 1), orderDualLRTpartial, tresh = tresh, d = d, n = n, siginv = siginv, ord = c(2, 1), crit = stats::qchisq(1 - alpha, 1), mc.cores = parallel::detectCores()-1)
   orderfalse <- do.call(rbind, orderfalse)
   
   # Find MLE and test for zero effect
