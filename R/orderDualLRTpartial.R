@@ -1,6 +1,6 @@
 #' Test if a causal ordering is plausible
 #'
-#' This (helper) function test whether a given causal ordering is plausible based on the dual likelihood ratio test.
+#' This (helper) function tests whether a given causal ordering is plausible based on the dual likelihood ratio test.
 #' Note that a causal ordering corresponds to a partition of the variables into three groups, before, between and after the cause and effect of interest.
 #'
 #' @param index Integer representing the causal ordering.
