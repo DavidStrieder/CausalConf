@@ -51,7 +51,7 @@ confDualLRTpartial <- function(data, alpha = 0.05) {
   }
   
   # If no plausible orderings, return NA otherwise test within intervals for effect
-  if (nrow(ordertrue) == 0) {
+  if (is.null(ordertrue)) {
     return(c(zeropossible, NA, NA))
   } else {
     intervals <- intervalsDualLRTpartial(siginv, ordertrue[, 1:d, drop = FALSE], L1, alpha, d, n)
