@@ -1,7 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-`CausalConf` : Confidence Intervals under Structure Uncertainty
+`CausalConf` : Confidence Intervals of Causal Effects under Structure
+Uncertainty
 
 Constructs confidence intervals for total causal effects based on
 observational data alone when the underlying causal structure is

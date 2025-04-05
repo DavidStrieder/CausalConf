@@ -8,7 +8,7 @@ output: rmarkdown::github_document
 knitr::opts_chunk$set(collapse=TRUE, comment="##", fig.retina=2, fig.path = "README_figs/README-")
 ```
 
-`CausalConf` : Confidence Intervals under Structure Uncertainty
+`CausalConf` : Confidence Intervals of Causal Effects under Structure Uncertainty
 
 Constructs confidence intervals for total causal effects based on observational data alone when the underlying causal structure is unknown. 
 Captures both types of uncertainty, uncertainty regarding the causal structure resulting from a data-driven model selection, and uncertainty about the numerical size of the effect. 
