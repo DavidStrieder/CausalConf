@@ -1,39 +1,47 @@
----
-output: rmarkdown::github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(collapse=TRUE, comment="##", fig.retina=2, fig.path = "README_figs/README-")
-```
-
 `CausalConf` : Confidence Intervals under Structure Uncertainty
 
-Constructs confidence intervals for total causal effects based on observational data alone when the underlying causal structure is unknown. 
-Captures both types of uncertainty, uncertainty regarding the causal structure resulting from a data-driven model selection, and uncertainty about the numerical size of the effect. 
-Assumes linear structural equation models with partially homoscedastic Gaussian errors to ensure identifiability.
-For details, see D. Strieder and M. Drton, Identifying Total Causal Effects in Linear Models under Partial Homoscedasticity (https://proceedings.mlr.press/v246/strieder24a.html).
+Constructs confidence intervals for total causal effects based on
+observational data alone when the underlying causal structure is
+unknown. Captures both types of uncertainty, uncertainty regarding the
+causal structure resulting from a data-driven model selection, and
+uncertainty about the numerical size of the effect. Assumes linear
+structural equation models with partially homoscedastic Gaussian errors
+to ensure identifiability. For details, see D. Strieder and M. Drton,
+Identifying Total Causal Effects in Linear Models under Partial
+Homoscedasticity
+(<https://proceedings.mlr.press/v246/strieder24a.html>).
 
 The following functions are implemented:
 
-- `confDualLRTpartial` : Main function that computes a confidence interval for the total causal effect
-- `intervalsDualLRTpartial` : Helper function that calculates the bounds of the confidence interval
-- `orderDualLRTpartial` : Helper function that tests if a causal ordering is plausible
- 
+- `confDualLRTpartial` : Main function that computes a confidence
+  interval for the total causal effect
+- `intervalsDualLRTpartial` : Helper function that calculates the bounds
+  of the confidence interval
+- `orderDualLRTpartial` : Helper function that tests if a causal
+  ordering is plausible
+
 ### Installation
 
-```{r eval=FALSE}
+``` r
 devtools::install_github("DavidStrieder/CausalConf")
 ```
 
 ### Usage
 
-Small example using the frequently studied protein expression data (Sachs et al., Causal protein-signaling networks derived from multiparameter single-cell data). We are interested in the causal effect of PKC on Jnk (and vice versa), and we will compare the results to bootstrapping causal discovery algorithms (LiNGAM) as a benchmark.
+Small example using the frequently studied protein expression data
+(Sachs et al., Causal protein-signaling networks derived from
+multiparameter single-cell data). We are interested in the causal effect
+of PKC on Jnk (and vice versa), and we will compare the results to
+bootstrapping causal discovery algorithms (LiNGAM) as a benchmark.
 
-To showcase the standard usage of confDualLRTpartial, I'll keep the code straightforward and transparent, avoiding custom helper functions or wrappers.
+To showcase the standard usage of confDualLRTpartial, I’ll keep the code
+straightforward and transparent, avoiding custom helper functions or
+wrappers.
 
-```{r message=FALSE, warning=FALSE}
+``` r
 library(CausalConf)
 
 # For comparison
@@ -62,11 +70,17 @@ trueeffects <- c(coef(lm(Jnk ~ PKC + Plcg + PIP2 - 1, data))[1], 0)
 
 # Covers true effect from PKC to Jnk
 intervalPKCJnk
+## [1]  0.000000000 -0.007305013  0.272200955
 trueeffects[1]
+##       PKC 
+## 0.1336362
 
 # Correctly decides on no causal effect from Jnk to PKC
 intervalJnkPKC
+## [1] TRUE   NA   NA
 trueeffects[2]
+##   
+## 0
 
 
 # Bootstrap LiNGAM intervals as comparison
@@ -124,3 +138,5 @@ ggplot(results, aes(x = as.factor(method), color = as.factor(method))) +
     legend.position = c(0.82, 0.78)
   )
 ```
+
+<img src="README_figs/README-unnamed-chunk-3-1.png" width="672" />
